@@ -13,13 +13,13 @@ while getopts dtn options
 do
 	case $options in
 		d)
-			printf "%s" "$date"
+			printf "%s\n" "$date"
 			;;
 		t)
-			printf "%s" "$time"
+			printf "%s\n" "$time"
             ;;
         n)
             printf "%s\n" "$raw_date"
-            printf "%s" "$raw_time" 
+            printf "%s\n" "$raw_time" 
 	esac
 done
