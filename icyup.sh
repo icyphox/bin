@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-n=3; fn=$(tr -cd '[:alnum:]' < /dev/urandom | head -c$n)
+random_name="$(tr -dc 'a-zA-Z0-9' < /dev/random | fold -w 5 | head -n 1)"
 
 latest="$HOME/pics/scrots/latest.png"
 
 upload() {
-	file=$1
+    file="$(basename "$1")"
 	ext="${file##*.}"
-	fullname="$fn.$ext"
+	fullname="$random_name.$ext"
 	scp -P 443 "$1" emerald:icywww/uploads/"$fullname"
 	echo "https://x.icyphox.sh/$fullname"
 	echo "https://x.icyphox.sh/$fullname" | xclip -selection clipboard

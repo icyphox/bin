@@ -2,7 +2,7 @@
 # scr: screenshot tool
 
 scr_path=~/pics/scrots
-n=6; output=$(tr -cd '[:alnum:]' < /dev/urandom | head -c$n)
+output="$(tr -dc 'a-zA-Z0-9' < /dev/random | fold -w 5 | head -n 1)"
 
 usage() {
     echo "usage:"

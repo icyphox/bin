@@ -41,7 +41,7 @@ prinfo() {
 
 
 	printf '\e[%sD\e[B' "${#3}"
-    printf '%b' "${YLW}$1${RST}$2"
+    printf '%b' "${BLU}$1${RST}$2"
 }
 
 user="$USER"
@@ -49,34 +49,44 @@ host="$HOSTNAME"
 kernel="$(uname -r)"
 shell="$(basename "$SHELL")"
 
+# cactus art
+#art="
+#${GRN}
+#    o 
+#.oo.Oo.
+#   O. 
+#    Ooo'${RST}
+# ${RED}___${RST}${GRN}O${RST}${RED}___
+# \     /
+#  \___/${RST}
+#"
+
+# blowfish
+
+printf '\e[?25l'
+printf '\e[2J'
 art="
-${GRN}
-    o 
-.oo.Oo.
-   O. 
-    Ooo'${RST}
- ${RED}___${RST}${GRN}O${RST}${RED}___
- \     /
-  \___/${RST}
+${YLW}      \.-----./
+      / ^ ^ ^ \ ${RST}
+    (${PUR}o${RST})(${PUR}o${RST})${YLW} ^ ^ |_/|${RST}
+     ${RED}{}${RST} ${YLW}^ ^ > ^| \|
+      \^ ^ ^ ^/
+       /-----\\ ${RST}
+
 "
 
-. /etc/os-release
-os="$ID"
-pkgs="$(kiss l | wc -l)"
-
-printf '\e[2J'
-printf '\e[?25l'
-
-printf '%b\n' "$art"
+printf '%b' "$art"
+os="$(uname)"
+pkgs="$(pkg_info | wc -l)"
 
 printf '%b\n' "${CYN}$user${RST}@${CYN}$host${RST}"
 
 prinfo "os" "          $os"
 prinfo "kernel" "      $kernel" "$prev_line"
-prinfo "pkgs" "        $pkgs" "$prev_line"
+prinfo "pkgs" "   $pkgs" "$prev_line"
 prinfo "shell" "       $shell" "$prev_line"
 
 
 # Pause
 read -rsn1 _
-reset
+clear
