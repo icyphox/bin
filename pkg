@@ -1,0 +1,17 @@
+#!/bin/sh
+# pkg - a wrapper around pkg_*
+
+case "$1" in
+    add*)
+        shift
+        doas pkg_add "$@"
+        ;;
+    del*)
+        shift
+        doas pkg_delete "$@"
+        ;;
+    info*)
+        shift
+        doas pkg_info -Q "$@"
+        ;;
+esac
