@@ -4,7 +4,10 @@
 case "$1" in
     add*)
         shift
-        doas pkg_add "$@"
+        printf 'install? [y/n]: '
+        read
+        [[ "$REPLY" == y ]] &&
+            doas pkg_add "$@"
         ;;
     del*)
         shift
@@ -13,5 +16,8 @@ case "$1" in
     info*)
         shift
         doas pkg_info -Q "$@"
+        ;;
+    upd*)
+        doas pkg_add -u
         ;;
 esac
