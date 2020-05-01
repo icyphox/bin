@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-cap=$(< /sys/class/power_supply/BAT0/capacity)
-status=$(< /sys/class/power_supply/BAT0/status)
+cap="$(apm -l)"
+is_charging="$(apm -a)"
 
+status="discharging"
+[[ "$is_charging" -eq 1 ]] &&
+    status="charging"
 printf '%s%% [%s]\n' $cap $status 
