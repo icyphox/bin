@@ -5,26 +5,16 @@ is_charging="$(apm -a)"
 
 status="discharging"
 
-# stolen from nerd
-health() {
-    sym="$1"
-    for i in {0..4}
-    do
-        if [[ $i -le $(( cap/20 )) ]]; then
-            printf '%s' "#[fg=colour1]$sym "
-        else
-            printf '%s' "#[fg=colour12]$sym "
-        fi
-    done
-    echo
+tmux_bat() {
+    if [[ "$is_charging" -eq 1 ]]; then 
+        printf '%s%%' "+$cap"
+    else
+        printf '%s%%' "$cap"
+    fi
 }
 
 if [[ "$1" == "-q" ]]; then
-    if [[ "$is_charging" -eq 1 ]]; then
-        health +
-    else
-        health • 
-    fi
+   tmux_bat 
 else
     [[ "$is_charging" -eq 1 ]] &&
         status="charging"

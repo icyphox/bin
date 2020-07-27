@@ -2,7 +2,7 @@
 
 random_name="$(tr -dc 'a-zA-Z0-9' < /dev/random | fold -w 5 | head -n 1)"
 
-latest="$HOME/pics/scrots/latest.png"
+export LATEST_SCROT="$HOME/pics/scrots/latest.png"
 
 upload() {
     file="$(basename "$1")"
@@ -14,7 +14,7 @@ upload() {
 }
 
 if [ "$1" == "l" ]; then
-    upload "$latest" 
+    upload "$LATEST_SCROT" 
 elif [ "$1" != "l" ]; then
    upload "$1" 
 else
